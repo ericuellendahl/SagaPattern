@@ -1,11 +1,10 @@
-﻿using ApiSaga.Services;
-using Rebus.Bus;
+﻿using Rebus.Bus;
 using Rebus.Handlers;
 using Shared;
 
 namespace ApiSaga.Saga.Handlers;
 
-public class PedidoEnviadoHandler(IBus bus, IEmailService email, ILogger<PedidoEnviadoHandler> logger) : IHandleMessages<PedidoEnviado>
+public class PedidoEnviadoHandler(IBus bus, ILogger<PedidoEnviadoHandler> logger) : IHandleMessages<PedidoEnviado>
 {
     public async Task Handle(PedidoEnviado message)
     {
