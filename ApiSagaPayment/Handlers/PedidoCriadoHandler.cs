@@ -6,9 +6,9 @@ using Shared;
 
 namespace ApiSagaPayment.Handlers;
 
-public class EnviarPagamentoAprovadoHandler(IBus bus, ILogger<EnviarPagamentoAprovadoHandler> logger) : IHandleMessages<EnviarPagamentoAprovado>
+public class EnviarPagamentoAprovadoHandler(IBus bus, ILogger<EnviarPagamentoAprovadoHandler> logger) : IHandleMessages<EnviarPagamento>
 {
-    public async Task Handle(EnviarPagamentoAprovado message)
+    public async Task Handle(EnviarPagamento message)
     {
         logger.LogInformation("📦 Recebido PedidoCriado: {PedidoId}", message.PedidoId);
 

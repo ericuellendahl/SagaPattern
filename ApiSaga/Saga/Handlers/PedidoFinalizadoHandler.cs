@@ -16,6 +16,6 @@ public class PedidoFinalizadoHandler(IBus bus, ILogger<PedidoFinalizadoHandler> 
 
         logger.LogInformation("4-1 Pedido {PedidoId} finalizado com sucesso no serviço de pagamento.", message.PedidoId);
 
-        await bus.Send(new EnviarPagamentoAprovado(message.PedidoId, message.Valor, message.EmailCliente, DateTime.Now));
+        await bus.Send(new EnviarPagamento(message.PedidoId, message.Valor, message.EmailCliente, DateTime.Now));
     }
 }

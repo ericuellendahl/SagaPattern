@@ -35,7 +35,7 @@ public record PedidoFinalizado(
 );
 
 // Pedido aprovado e enviado ao serviço de pagamento
-public record EnviarPagamentoAprovado(
+public record EnviarPagamento(
     Guid PedidoId,
     decimal Valor,
     string EmailCliente,

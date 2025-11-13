@@ -31,7 +31,7 @@ builder.Services.AddRebus(config => config
         .Map<PedidoEnviado>("pedido-queue")
         .Map<EnviarEmail>("pedido-queue")
         .Map<PedidoFinalizado>("pedido-queue")
-        .Map<EnviarPagamentoAprovado>("pagamento-queue"))
+        .Map<EnviarPagamento>("pagamento-queue"))
     .Sagas(s => s.StoreInMemory())
     .Options(o => o.RetryStrategy(maxDeliveryAttempts: 1)));
 
