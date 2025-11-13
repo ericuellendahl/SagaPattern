@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="../ApiSagaPayment/ApiSagaPayment.csproj" Id="76484b3b-e6f4-461f-b426-66807b357cf4" />
+  <Project Path="../AppHost/AppHost.csproj" Id="06ea2546-c0e6-44ac-a751-8f35695f2a9d" />
+  <Project Path="../ServiceDefaults/ServiceDefaults.csproj" Id="10aa3b9b-fb42-4ebb-b60a-7c375d826e77" />
+  <Project Path="../Shared/Shared.csproj" Id="e8c200fa-b07b-474a-8863-1b54a990fd78" />
   <Project Path="ApiSaga.csproj" />
 </Solution>

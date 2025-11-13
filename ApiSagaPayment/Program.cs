@@ -1,11 +1,6 @@
-ï»¿using ApiSaga.Configurations;
-using ApiSaga.Saga;
-using ApiSaga.Services;
+using ApiSagaPayment.Configurations;
 using Rebus.Config;
-using Rebus.Persistence.InMem;
-using Rebus.Retry.Simple;
 using Rebus.Routing.TypeBased;
-using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IEmailService, EmailService>();
-
+// Configurações do RabbitMQ
 var rabbitSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>()!;
 
 var amqpUrl =
@@ -23,19 +17,14 @@ var amqpUrl =
     $"{rabbitSettings.UserName}:{rabbitSettings.Password}@" +
     $"{rabbitSettings.HostName}:{rabbitSettings.Port}/{rabbitSettings.VirtualHost}";
 
+// Configuração do Rebus
 builder.Services.AddRebus(config => config
-    .Logging(l => l.ColoredConsole(Rebus.Logging.LogLevel.Info))
-    .Transport(t => t.UseRabbitMq(amqpUrl, "pedido-queue"))
+    .Transport(t => t.UseRabbitMq(amqpUrl, "pagamento-queue"))
     .Routing(r => r.TypeBased()
-        .Map<PedidoCriado>("pedido-queue")
-        .Map<PedidoEnviado>("pedido-queue")
-        .Map<EnviarEmail>("pedido-queue")
-        .Map<PedidoFinalizado>("pedido-queue")
-        .Map<EnviarPagamentoAprovado>("pagamento-queue"))
-    .Sagas(s => s.StoreInMemory())
-    .Options(o => o.RetryStrategy(maxDeliveryAttempts: 1)));
+    )
+);
 
-builder.Services.AutoRegisterHandlersFromAssemblyOf<PedidoSaga>();
+builder.Services.AutoRegisterHandlersFromAssemblyOf<Program>();
 
 var app = builder.Build();
 

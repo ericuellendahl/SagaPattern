@@ -1,6 +1,0 @@
-@ApiSaga_HostAddress = http://localhost:5286
-
-GET {{ApiSaga_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
